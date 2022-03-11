@@ -64,6 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SCORECARD_TOKEN }}
           GITHUB_COMMIT_SHA: ${{ github.sha }}
           GITHUB_REPO_OWNER: 'ossf'
+          GITHUB_OWNER: 'ossf'
           GITHUB_REPO_NAME: 'scorecard-action'
           GITHUB_ISSUE_TITLE: 'test-organization-ls/scorecard-action-private-repo-tests failed'
           GITHUB_ISSUE_BODY: 'test-organization-ls/scorecard-action-private-repo-tests failed'
