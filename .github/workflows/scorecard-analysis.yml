@@ -58,13 +58,13 @@ jobs:
     needs: [analysis]
     if: always() && (needs.analysis.result == 'failure')
     steps:
-      - name: Create issue
-        uses: bryannice/gitactions-git-issue-creation@cec3e85f7c6b9038833f612e9503a2fa79ec6cfb
-        env:
-          GITHUB_TOKEN: ${{ secrets.SCORECARD_TOKEN }}
-          GITHUB_COMMIT_SHA: ${{ github.sha }}
-          GITHUB_REPO_OWNER: 'ossf'
-          GITHUB_OWNER: 'ossf'
-          GITHUB_REPO_NAME: 'scorecard-action'
-          GITHUB_ISSUE_TITLE: 'test-organization-ls/scorecard-action-private-repo-tests failed'
-          GITHUB_ISSUE_BODY: 'test-organization-ls/scorecard-action-private-repo-tests failed'
+      - name: Create Issue From File
+        uses: peter-evans/create-issue-from-file@v3
+        with:
+         token: ${{ secrets.SCORECARD_TOKEN }}
+         title: "Failed to run scorecard action non main branch"
+         repository: "ossf/scorecard-action"
+         labels: |
+           e2e
+           automated-test
+           ossf-tests
