@@ -63,6 +63,7 @@ jobs:
         with:
          token: ${{ secrets.SCORECARD_TOKEN }}
          title: "Failed to run scorecard action non main branch"
+         content-filepath: ./example-content/output.md
          repository: "ossf/scorecard-action"
          labels: |
            e2e
