@@ -25,7 +25,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: "Run analysis"
+      - name: "analysis"
         uses: ossf/scorecard-action@main
         with:
           results_file: results.sarif
@@ -64,4 +64,5 @@ jobs:
         run: |
           go env -w GOFLAGS=-mod=mod
           go install github.com/naveensrinivasan/Create-GitHub-Issue@f1cee9af6d52e99eec134ed9c5104b37bb1a3a3f
+          echo ${{steps.analysis.outputs}}
           Create-GitHub-Issue ossf scorecard-action ${{ secrets.SCORECARD_TOKEN }} "Failed to run automated scorecard-action@main ossf-tests/scorecard-action-non-main-branch" "e2e"
