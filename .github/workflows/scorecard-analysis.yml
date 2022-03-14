@@ -57,13 +57,13 @@ jobs:
     needs: [analysis]
     if: always() && (needs.analysis.result == 'failure')
     steps:
-      - name: Create Issue From File
-        uses: peter-evans/create-issue-from-file@v3
+      - name: Create GitHub issue when the Scorecard Job fails
+      - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v2.3.4
+      - uses: actions/setup-go@f6164bd8c8acb4a71fb2791a8b6c4024ff038dab # v2.2.0
         with:
-         token: ${{ secrets.SCORECARD_TOKEN }}
-         title: "Failed to run scorecard action non main branch"
-         content-filepath: example-content/output.md
-         labels: |
-           e2e
-           automated-test
-           ossf-tests
+          go-version: '1.17'
+      - name: Create GitHub Issue
+        run: |
+          go env -w GOFLAGS=-mod=mod
+          go install github.com/naveensrinivasan/Create-GitHub-Issue@f1cee9af6d52e99eec134ed9c5104b37bb1a3a3f
+          Create-GitHub-Issue ossf scorecard-action ${{ secrets.SCORECARD_TOKEN }} "Testing issue creation" "e2e"
