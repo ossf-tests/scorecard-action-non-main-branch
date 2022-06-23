@@ -70,7 +70,7 @@ jobs:
         if: always() && steps.scorecard-run.outcome != 'success'
         uses: actions-ecosystem/action-create-issue@b02a3c1d9d929a5839315bd255e40389f0dab627 #v1
         with:
-          github_token: ${{ secrets.SCORECARD_READ_TOKEN }}
+          github_token: ${{ secrets.SCORECARD_TOKEN }}
           title: "Failing e2e tests - scorecard-bash on ${{ github.repository }}"
           body: |
             Matrix: ${{ toJSON(matrix) }}
